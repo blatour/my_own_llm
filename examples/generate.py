@@ -58,6 +58,18 @@ def main():
     
     # Load trained weights
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+    print(f"PyTorch version: {torch.__version__}")
+    print(f"CUDA available: {torch.cuda.is_available()}")
+
+    if torch.cuda.is_available():
+        print(f"Number of GPUs: {torch.cuda.device_count()}")
+        print(f"GPU Name: {torch.cuda.get_device_name(0)}")
+    else:
+        print("PyTorch cannot find a CUDA-enabled GPU.")
+        print("Please ensure you have installed the correct PyTorch version with CUDA support and that your NVIDIA drivers are up to date.")
+
+
     model.load_state_dict(torch.load(model_path, map_location=device))
     model.to(device)
     model.eval()
